@@ -7,7 +7,12 @@
 <script>
 $(document).ready(function(){
   $("#hide").click(function(){
-    $("p").hide(1000);
+    $("p").hide(1000，"linear",function(){
+    	alert("Hide()已调用")
+    });
+  });
+  $("#hide").click(function(){
+    $("p").show(1000);
   });
   $("#show").click(function(){
     $("p").show(1000);
