@@ -1,12 +1,713 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="author" content="jiaoshen110" />
-    <title>Personal Bio</title>
-  </head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Personal bio and portfolio of Junjie Zhao">
+    <meta name="author" content="Junjie Zhao">
+    <title>Junjie Zhao - Full-Stack Engineer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  <body>
-    Under construction
-  </body>
+        :root {
+            --primary-green: #6B7F5A;
+            --light-green: #8BA675;
+            --sage-green: #A8B89A;
+            --cream: #F5F4F0;
+            --dark-gray: #2F2F2F;
+            --light-gray: #8E8E8E;
+            --white: #FFFFFF;
+        }
+
+        body {
+            font-family: 'HK Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #8BA675 0%, #6B7F5A 50%, #A8B89A 100%);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Background blur effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(139, 166, 117, 0.4) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(107, 127, 90, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(168, 184, 154, 0.2) 0%, transparent 50%);
+            backdrop-filter: blur(100px);
+            z-index: -1;
+        }
+
+        .main-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .hero-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8rem;
+            max-width: 1200px;
+            width: 100%;
+            align-items: center;
+        }
+
+        /* Left side - Profile */
+        .profile-side {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .profile-image {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-green), var(--light-green));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+            color: var(--white);
+            font-weight: 700;
+            margin-bottom: 3rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-image::before {
+            content: '';
+            position: absolute;
+            inset: -8px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--light-green), var(--sage-green));
+            z-index: -1;
+            opacity: 0.4;
+        }
+
+        .profile-info h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .profile-info .tagline {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 3rem;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .social-icon:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Right side - Navigation */
+        .navigation-side {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .nav-button {
+            display: block;
+            padding: 1.2rem 2.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            transition: left 0.3s ease;
+        }
+
+        .nav-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateX(-5px);
+            box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-button:hover::before {
+            left: 0;
+        }
+
+        /* Secondary pages styling */
+        .page-content {
+            display: none;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .page-content.active {
+            display: block;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .page-header .subtitle {
+            font-size: 1.1rem;
+            color: var(--light-gray);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            padding: 0.8rem 1.5rem;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: none;
+            border-radius: 25px;
+            color: var(--primary-green);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .back-button:hover {
+            background: var(--white);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        /* About page content */
+        .about-grid {
+            display: grid;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--dark-gray);
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        /* Skills page content */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .skill-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(107, 127, 90, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .skill-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-green);
+        }
+
+        .skill-card h3 {
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .skill-card p {
+            color: var(--light-gray);
+            line-height: 1.6;
+        }
+
+        /* Experience page content */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline-item {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--primary-green);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .timeline-item h3 {
+            color: var(--primary-green);
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-item h4 {
+            color: var(--light-green);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-item .date {
+            color: var(--light-gray);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-item p {
+            color: var(--dark-gray);
+            line-height: 1.7;
+        }
+
+        /* Contact page content */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .contact-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(107, 127, 90, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-icon {
+            font-size: 2.5rem;
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+        }
+
+        .contact-card h3 {
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .contact-card a {
+            color: var(--light-green);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .contact-card a:hover {
+            color: var(--primary-green);
+        }
+
+        .contact-card p {
+            color: var(--dark-gray);
+            font-weight: 500;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-section {
+                gap: 4rem;
+            }
+
+            .profile-image {
+                width: 250px;
+                height: 250px;
+                font-size: 5rem;
+            }
+
+            .profile-info h1 {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 1rem;
+            }
+
+            .hero-section {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                text-align: center;
+            }
+
+            .profile-image {
+                width: 200px;
+                height: 200px;
+                font-size: 4rem;
+                margin-bottom: 2rem;
+            }
+
+            .profile-info h1 {
+                font-size: 2.5rem;
+            }
+
+            .profile-info .tagline {
+                font-size: 1rem;
+                margin-bottom: 2rem;
+            }
+
+            .nav-button {
+                padding: 1rem 2rem;
+                font-size: 1rem;
+            }
+
+            .nav-button:hover {
+                transform: translateY(-2px);
+            }
+
+            .social-icons {
+                gap: 1rem;
+                margin-top: 1rem;
+            }
+
+            .social-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+
+            .page-content {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+
+            .page-header h2 {
+                font-size: 2rem;
+            }
+
+            .skills-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Main Hero Section -->
+    <div class="main-container" id="home">
+        <div class="hero-section">
+            <!-- Left Side - Profile -->
+            <div class="profile-side">
+                <div class="profile-info">
+                    <h1>Junjie Zhao</h1>
+                    <p class="tagline">Full-Stack Engineer</p>
+                </div>
+                <div class="social-icons">
+                    <a href="https://linkedin.com/in/junjie-zhao-b53117b9" target="_blank" class="social-icon" aria-label="LinkedIn">💼</a>
+                    <a href="mailto:no2332@hotmail.com" class="social-icon" aria-label="Email">📧</a>
+                    <a href="https://github.com/johnjunjiezhao" target="_blank" class="social-icon" aria-label="GitHub">🐙</a>
+                </div>
+            </div>
+
+            <!-- Right Side - Navigation -->
+            <div class="navigation-side">
+                <a href="javascript:void(0)" class="nav-button" onclick="showPage('about')">About Me</a>
+                <a href="javascript:void(0)" class="nav-button" onclick="showPage('skills')">Skills & Expertise</a>
+                <a href="javascript:void(0)" class="nav-button" onclick="showPage('experience')">Experience</a>
+                <a href="javascript:void(0)" class="nav-button" onclick="showPage('contact')">Get In Touch</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back Button -->
+    <button class="back-button" id="backButton" onclick="showHome()" style="display: none;">
+        ← Back
+    </button>
+
+    <!-- About Page -->
+    <div class="main-container page-content" id="about">
+        <div class="page-header">
+            <h2>About Me</h2>
+            <p class="subtitle">Full-Stack Engineer & Innovation Enthusiast</p>
+        </div>
+        <div class="about-grid">
+            <div class="about-text">
+                <p>
+                    Hello! I'm Junjie Zhao, a Full-Stack Engineer with 4 years of experience in Ruby on Rails and modern 
+                    JavaScript frameworks, passionate about building collaborative SaaS platforms and automating workflows 
+                    to empower teams.
+                </p>
+                <p>
+                    I have proven expertise in end-to-end development (React.js, Rails) and cloud-native solutions 
+                    (AWS, Docker, Bitbucket Pipeline), with a focus on scalable architecture and cross-functional collaboration. 
+                    Currently working at Sealink, I've led the modernization of legacy booking platforms and developed 
+                    innovative automation solutions.
+                </p>
+                <p>
+                    I'm committed to driving innovation through observability-driven iteration and inclusive, agile practices. 
+                    I hold AWS certifications in Solutions Architecture and AI, and I'm passionate about continuous learning 
+                    and staying at the forefront of cloud technologies.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Skills Page -->
+    <div class="main-container page-content" id="skills">
+        <div class="page-header">
+            <h2>Skills & Expertise</h2>
+            <p class="subtitle">Technical Proficiencies</p>
+        </div>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <div class="skill-icon">⚙️</div>
+                <h3>Backend Development</h3>
+                <p>Ruby on Rails (4+ years), RESTful APIs, MySQL, Redis, OpenTelemetry, Shoryuken, Sidekiq, Microservices</p>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">💻</div>
+                <h3>Frontend Development</h3>
+                <p>React.js, Redux Toolkit, React Bootstrap, JavaScript, HTML5, CSS3, Webpack</p>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">☁️</div>
+                <h3>DevOps & Cloud</h3>
+                <p>AWS CDK & CloudFormation, Docker, Bitbucket Pipelines, CloudFront, Cloudflare</p>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">📊</div>
+                <h3>Testing & Observability</h3>
+                <p>RSpec, Jest, Capybara, Playwright, Grafana Cloud, OpenTelemetry, CloudWatch</p>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">🛠️</div>
+                <h3>Tools & Collaboration</h3>
+                <p>Git, Jira, Agile (Scrum/Kanban), Cross-functional teamwork, CI/CD automation</p>
+            </div>
+            <div class="skill-card">
+                <div class="skill-icon">🚀</div>
+                <h3>Automation & Innovation</h3>
+                <p>No-code-inspired solutions, Dynamic rule engines, Workflow automation, SaaS platforms</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Experience Page -->
+    <div class="main-container page-content" id="experience">
+        <div class="page-header">
+            <h2>Professional Journey</h2>
+            <p class="subtitle">Career Experience & Education</p>
+        </div>
+        <div class="timeline">
+            <div class="timeline-item">
+                <h3>Software Developer</h3>
+                <h4>Sealink | Remote (Adelaide, Australia)</h4>
+                <p class="date">Oct 2021 – Present</p>
+                <p>Leading full-stack development for multi-tenant SaaS booking platform serving 8 business units. 
+                   Modernized legacy CoffeeScript platform with React.js and Redux, implementing end-to-end 
+                   observability with Grafana Cloud and OpenTelemetry. Pioneered no-code automation via dynamic 
+                   rule engine (Wongji:Engine) and reduced release cycles by 40% through CI/CD automation.</p>
+            </div>
+            <div class="timeline-item">
+                <h3>Key Achievements</h3>
+                <h4>Platform Modernization & Innovation</h4>
+                <p>• Rebuilt booking UI/UX with React.js, improving maintainability and user engagement<br>
+                   • Developed microservices including Auth, Auditor, Payment, and Product Catalogue services<br>
+                   • Integrated SMS Global, Sihot PMS, and RMS PMS with core booking system<br>
+                   • Migrated background job processing to Active Job and Shoryuken (AWS SQS)</p>
+            </div>
+            <div class="timeline-item">
+                <h3>Education</h3>
+                <h4>Master of Innovation and Computing</h4>
+                <p class="date">The University of Adelaide | Feb 2018 – Dec 2019</p>
+                <p>Specialized in innovation methodologies and modern computing technologies, building 
+                   foundation for full-stack development and agile collaboration practices.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Page -->
+    <div class="main-container page-content" id="contact">
+        <div class="page-header">
+            <h2>Get In Touch</h2>
+            <p class="subtitle">Let's Connect</p>
+        </div>
+        <div class="contact-grid">
+            <div class="contact-card">
+                <div class="contact-icon">📧</div>
+                <h3>Email</h3>
+                <a href="mailto:no2332@hotmail.com">no2332@hotmail.com</a>
+            </div>
+            <div class="contact-card">
+                <div class="contact-icon">💼</div>
+                <h3>LinkedIn</h3>
+                <a href="https://linkedin.com/in/junjie-zhao-b53117b9" target="_blank">linkedin.com/in/junjie-zhao-b53117b9</a>
+            </div>
+            <div class="contact-card">
+                <div class="contact-icon">🏠</div>
+                <h3>Location</h3>
+                <p>Australia</p>
+            </div>
+        </div>
+        
+        <!-- Certifications -->
+        <div class="page-header" style="margin-top: 4rem;">
+            <h2>Certifications</h2>
+            <p class="subtitle">Professional Credentials</p>
+        </div>
+        <div class="contact-grid">
+            <div class="contact-card">
+                <div class="contact-icon">🏆</div>
+                <h3>AWS Certified Solutions Architect</h3>
+                <p>Associate Level - Cloud Architecture & Best Practices</p>
+            </div>
+            <div class="contact-card">
+                <div class="contact-icon">🤖</div>
+                <h3>AWS Certified AI Practitioner</h3>
+                <p>Artificial Intelligence & Machine Learning on AWS</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showPage(pageId) {
+            // Hide home and all pages
+            document.getElementById('home').style.display = 'none';
+            document.querySelectorAll('.page-content').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page and back button
+            document.getElementById(pageId).classList.add('active');
+            document.getElementById('backButton').style.display = 'block';
+            
+            // Update URL without page reload
+            history.pushState({page: pageId}, '', `#${pageId}`);
+        }
+
+        function showHome() {
+            // Hide all pages and back button
+            document.querySelectorAll('.page-content').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById('backButton').style.display = 'none';
+            
+            // Show home
+            document.getElementById('home').style.display = 'flex';
+            
+            // Update URL
+            history.pushState({page: 'home'}, '', '/');
+        }
+
+        // Handle browser back/forward buttons
+        window.addEventListener('popstate', function(event) {
+            if (event.state && event.state.page) {
+                if (event.state.page === 'home') {
+                    showHome();
+                } else {
+                    showPage(event.state.page);
+                }
+            } else {
+                showHome();
+            }
+        });
+
+        // Handle direct navigation to sections
+        window.addEventListener('load', function() {
+            const hash = window.location.hash.substring(1);
+            if (hash && ['about', 'skills', 'experience', 'contact'].includes(hash)) {
+                showPage(hash);
+            }
+        });
+    </script>
+</body>
 </html>
