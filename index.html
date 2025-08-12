@@ -503,6 +503,7 @@
                 <a href="javascript:void(0)" class="nav-button" onclick="showPage('about')">About Me</a>
                 <a href="javascript:void(0)" class="nav-button" onclick="showPage('skills')">Skills & Expertise</a>
                 <a href="javascript:void(0)" class="nav-button" onclick="showPage('experience')">Experience</a>
+                <a href="javascript:void(0)" class="nav-button" onclick="showPage('certificates')">Certificates</a>
                 <a href="javascript:void(0)" class="nav-button" onclick="showPage('contact')">Get In Touch</a>
             </div>
         </div>
@@ -615,6 +616,26 @@
         </div>
     </div>
 
+    <!-- Certificates Page -->
+    <div class="main-container page-content" id="certificates">
+        <div class="page-header">
+            <h2>Certificates</h2>
+            <p class="subtitle">Professional Credentials</p>
+        </div>
+        <div class="contact-grid">
+            <div class="contact-card">
+                <div class="contact-icon">🏆</div>
+                <h3>AWS Certified Solutions Architect</h3>
+                <p>Associate Level - Cloud Architecture & Best Practices</p>
+            </div>
+            <div class="contact-card">
+                <div class="contact-icon">🤖</div>
+                <h3>AWS Certified AI Practitioner</h3>
+                <p>Artificial Intelligence & Machine Learning on AWS</p>
+            </div>
+        </div>
+    </div>
+
     <!-- Contact Page -->
     <div class="main-container page-content" id="contact">
         <div class="page-header">
@@ -636,24 +657,6 @@
                 <div class="contact-icon">🏠</div>
                 <h3>Location</h3>
                 <p>Australia</p>
-            </div>
-        </div>
-        
-        <!-- Certifications -->
-        <div class="page-header" style="margin-top: 4rem;">
-            <h2>Certifications</h2>
-            <p class="subtitle">Professional Credentials</p>
-        </div>
-        <div class="contact-grid">
-            <div class="contact-card">
-                <div class="contact-icon">🏆</div>
-                <h3>AWS Certified Solutions Architect</h3>
-                <p>Associate Level - Cloud Architecture & Best Practices</p>
-            </div>
-            <div class="contact-card">
-                <div class="contact-icon">🤖</div>
-                <h3>AWS Certified AI Practitioner</h3>
-                <p>Artificial Intelligence & Machine Learning on AWS</p>
             </div>
         </div>
     </div>
@@ -704,7 +707,7 @@
         // Handle direct navigation to sections
         window.addEventListener('load', function() {
             const hash = window.location.hash.substring(1);
-            if (hash && ['about', 'skills', 'experience', 'contact'].includes(hash)) {
+            if (hash && ['about', 'skills', 'experience', 'certificates', 'contact'].includes(hash)) {
                 showPage(hash);
             }
         });
